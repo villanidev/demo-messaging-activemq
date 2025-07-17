@@ -1,0 +1,14 @@
+# Spring properties
+spring:
+  application:
+    name: demo-messaging-activemq
+  artemis:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    mode: native
+
+# App properties
+app:
+  queue:
+    name: books.queue

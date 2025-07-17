@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  artemis:
+    image: apache/activemq-artemis:2.41.0-alpine
+    container_name: artemis
+    ports:
+      - "8161:8161"  # Web console (http://localhost:8161)
+      - "61616:61616" # JMS
+    environment:
+      - ARTEMIS_USER=admin
+      - ARTEMIS_PASSWORD=admin
+      - ANONYMOUS_LOGIN=true # For POC only, disable in production
+    volumes:
+      - artemis-data:/var/lib/artemis/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8161"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  artemis-data:
