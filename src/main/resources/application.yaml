@@ -7,8 +7,27 @@ spring:
     user: admin
     password: admin
     mode: native
+  datasource:
+    url: jdbc:h2:mem:bookdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 # App properties
 app:
   queue:
     name: books.queue
+    #dlq: books.queue.DLQ
+  topic:
+    name: books.topic
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,jms
